@@ -1,5 +1,11 @@
 # kubesee
 
+> [!IMPORTANT]
+> this project is in its **very early stages**, and it will take a bit of time for it to reach feature parity with kubernetes-event-exporter.
+>
+> why does this exist? because kubernetes-event-exporter hasn't been updated in a long time and i got tired of trying to make it work also so i can get rid of bitnami
+> for real though, you should use [fluent-bit for k8 events](https://docs.fluentbit.io/manual/data-pipeline/filters/kubernetes) if you're not using it already
+
 kubernetes event exporter in elixir - export k8s cluster events to multiple sinks for observability, alerting, and analysis.
 
 ## overview
