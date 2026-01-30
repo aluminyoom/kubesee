@@ -1,0 +1,60 @@
+# The directory Mix will write compiled artifacts to.
+/_build/
+
+# If you run "mix test --cover", coverage assets end up here.
+/cover/
+
+# The directory Mix downloads your dependencies sources to.
+/deps/
+
+# Where third-party dependencies like ExDoc output generated docs.
+/doc/
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+*.ez
+
+# Ignore package tarball (built via "mix hex.build").
+kubesee-*.tar
+
+# Temporary files, for example, from tests.
+/tmp/
+
+# Ignore PLT files (Dialyzer)
+/priv/plts/
+*.plt
+*.plt.hash
+
+# IDE and editor files
+.elixir_ls/
+.idea/
+*.swp
+*.swo
+*~
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files with secrets
+.env
+.env.local
+*.env
+
+# Release artifacts
+/rel/artifacts/
+
+# Local config
+/config/*.secret.exs
+
+# Crash dumps
+core.*
+
+# Plans folder (local development only)
+.sisyphus/
