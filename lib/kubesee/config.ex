@@ -23,7 +23,8 @@ defmodule Kubesee.Config do
     :kube_burst,
     :metrics_name_prefix,
     :omit_lookup,
-    :cache_size
+    :cache_size,
+    :conn
   ]
 
   def parse(yaml_string) do
