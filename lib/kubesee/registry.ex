@@ -6,6 +6,7 @@ defmodule Kubesee.Registry do
   require Logger
 
   alias Kubesee.Config.Receiver
+  alias Kubesee.Sinks.Factory
 
   @default_max_queue_size 1_000
   @default_drain_timeout 30_000
@@ -200,7 +201,7 @@ defmodule Kubesee.Registry do
       {:error, :already_registered}
     else
       with {:ok, sink_module} <- sink_module(receiver.sink_type),
-           {:ok, sink_pid} <- sink_module.start_link(receiver.sink_config || %{}) do
+           {:ok, sink_pid} <- Factory.create(receiver) do
         new_state = %{
           state
           | sinks: Map.put(state.sinks, name, sink_pid),
@@ -215,7 +216,11 @@ defmodule Kubesee.Registry do
     end
   end
 
-  defp sink_module(:stdout), do: {:ok, Kubesee.Sink.Stdout}
+  defp sink_module(:stdout), do: {:ok, Kubesee.Sinks.Stdout}
+  defp sink_module(:file), do: {:ok, Kubesee.Sinks.File}
+  defp sink_module(:webhook), do: {:ok, Kubesee.Sinks.Webhook}
+  defp sink_module(:pipe), do: {:ok, Kubesee.Sinks.Pipe}
+  defp sink_module(:in_memory), do: {:ok, Kubesee.Sinks.InMemory}
   defp sink_module(other), do: {:error, {:unsupported_sink, other}}
 
   defp dispatch_event(receiver, sink_pid, sink_module, event, state) do
@@ -238,9 +243,7 @@ defmodule Kubesee.Registry do
         {:noreply, state}
 
       {:error, reason} ->
-        Logger.warning(
-          "failed to dispatch event for receiver #{receiver}: #{inspect(reason)}"
-        )
+        Logger.warning("failed to dispatch event for receiver #{receiver}: #{inspect(reason)}")
 
         Kernel.send(registry, {:dispatched, receiver})
         {:noreply, state}

@@ -1,7 +1,7 @@
 defmodule Kubesee.SinkTest do
   use ExUnit.Case
 
-  alias Kubesee.Sink.Stdout
+  alias Kubesee.Sinks.Stdout
 
   describe "Kubesee.Sink behaviour" do
     test "module exists" do
