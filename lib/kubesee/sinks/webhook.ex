@@ -153,7 +153,8 @@ defmodule Kubesee.Sinks.Webhook do
   end
 
   defp maybe_add_ssl_opt(opts, true, key, value), do: [{key, value} | opts]
+  defp maybe_add_ssl_opt(opts, _flag, _key, _value), do: opts
+
   defp maybe_add_ssl_opt(opts, value, key) when is_binary(value), do: [{key, value} | opts]
   defp maybe_add_ssl_opt(opts, _value, _key), do: opts
-  defp maybe_add_ssl_opt(opts, _flag, _key, _value), do: opts
 end
