@@ -38,6 +38,8 @@ defmodule Kubesee.MixProject do
       {:con_cache, "~> 1.1"},
       {:prom_ex, "~> 1.11"},
       {:plug_cowboy, "~> 2.7"},
+      {:brod, "~> 4.4"},
+      {:snappyer, "~> 1.2"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:mox, "~> 1.1", only: :test},
